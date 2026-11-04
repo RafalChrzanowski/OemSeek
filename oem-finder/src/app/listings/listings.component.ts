@@ -45,6 +45,16 @@ export class ListingsComponent {
             image: '/images/korepetycje.jpg',
             link: '/listings/2',
         },
+        {
+            id: 3,
+            title: 'Test',
+            category: 'Edukacja',
+            description:
+                'TEST 123. TEST 123. TEST 123. TEST 123. TEST 123. TEST 123. TEST 123. TEST 123. TEST 123. TEST 123. TEST 123. TEST 123. TEST 123. TEST 123. TEST 123. TEST 123. TEST 123. TEST 123. TEST 123. TEST 123. TEST 123.',
+            price: '60 zł / godz.',
+            image: '/images/korepetycje.jpg',
+            link: '/listings/3',
+        },
     ];
 
     get categories(): string[] {
