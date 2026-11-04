@@ -1,0 +1,77 @@
+<main class="page">
+    <header class="page__header">
+        <p class="eyebrow">TABLICA OGŁOSZEŃ</p>
+        <h1>Ogłoszenia</h1>
+        <p class="subtitle">Znajdź interesujące Cię ogłoszenie.</p>
+    </header>
+
+    <form class="search-bar" (submit)="$event.preventDefault(); applySearch()">
+        <input type="search" placeholder="Czego szukasz?" aria-label="Szukaj ogłoszeń" [value]="searchInput"
+            (input)="onSearchInput($event)" />
+
+        <button class="search-button" type="submit" aria-label="Szukaj">
+            <span aria-hidden="true">⌕</span>
+            <span>Szukaj</span>
+        </button>
+    </form>
+
+    <div class="catalog-layout" [class.catalog-layout--closed]="!categoriesOpen">
+        <aside class="category-sidebar">
+            <div class="category-sidebar__header">
+                <h2>Kategorie</h2>
+
+                <button class="toggle-sidebar" type="button" (click)="categoriesOpen = !categoriesOpen"
+                    [attr.aria-expanded]="categoriesOpen">
+                    {{ categoriesOpen ? 'Schowaj kategorie' : 'Pokaż kategorie' }}
+                </button>
+            </div>
+
+            <div *ngIf="categoriesOpen">
+                <button class="category-option" [class.category-option--active]="selectedCategory === ''" type="button"
+                    (click)="selectedCategory = ''">
+                    Wszystkie
+                </button>
+
+                <button class="category-option" *ngFor="let category of categories"
+                    [class.category-option--active]="selectedCategory === category" type="button"
+                    (click)="selectedCategory = category">
+                    {{ category }}
+                </button>
+
+                <button class="clear-button" type="button" (click)="clearFilters()">
+                    Wyczyść filtry
+                </button>
+            </div>
+        </aside>
+
+        <section class="results" aria-label="Lista ogłoszeń">
+            <p class="results-count">
+                Ogłoszenia: <strong>{{ filteredListings.length }}</strong>
+            </p>
+
+            <article class="announcement" *ngFor="let listing of filteredListings">
+                <img class="announcement__image" [src]="listing.image" [alt]="listing.title" />
+
+                <div class="announcement__details">
+                    <div class="announcement__meta">
+                        <h2>{{ listing.title }}</h2>
+                        <span class="category">{{ listing.category }}</span>
+                    </div>
+
+                    <p class="announcement__content">{{ listing.description }}</p>
+
+                    <div class="announcement__footer">
+                        <strong class="price">{{ listing.price }}</strong>
+                        <a class="button" [href]="listing.link">
+                            Przejdź <span aria-hidden="true">→</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <p class="empty" *ngIf="filteredListings.length === 0">
+                Nie znaleziono ogłoszeń. Zmień wyszukiwanie lub filtry.
+            </p>
+        </section>
+    </div>
+</main>
