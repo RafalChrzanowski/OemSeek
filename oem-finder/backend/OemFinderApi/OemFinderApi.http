@@ -1,0 +1,6 @@
+@OemFinderApi_HostAddress = http://localhost:5056
+
+GET {{OemFinderApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
